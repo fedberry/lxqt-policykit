@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=PolicyKit agent for LXQt
-TryExec=lxqt-policykit-agent
-Exec=lxqt-policykit-agent
-OnlyShowIn=LXQt;
-X-LXQt-Module=true
