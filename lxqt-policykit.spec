@@ -7,7 +7,7 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
 Version: 0.8.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://lxqt.org/downloads/lxqt/0.8.0/%{name}-%{version}.tar.xz
@@ -22,6 +22,8 @@ BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
 BuildRequires: pkgconfig(lxqt-qt5)
 BuildRequires: desktop-file-utils
+
+Provides: PolicyKit-authentication-agent
 
 %description
 %{summary}.
@@ -49,6 +51,9 @@ install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 %{_libexecdir}/lxqt-policykit-agent
 
 %changelog
+* Fri Dec 19 2014 Rex Dieter <rdieter@fedoraproject.org> 0.8.0-5
+- Provides: PolicyKit-authentication-agent
+
 * Mon Dec 08 2014 Helio Chissini de Castro <hcastro@redhat.com> - 0.8.0-4
 - Remove agent autostart already provided by lxqt-common.
 
