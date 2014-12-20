@@ -7,23 +7,25 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
 Version: 0.8.0
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://lxqt.org/downloads/lxqt/0.8.0/%{name}-%{version}.tar.xz
 # ( Upstream ? )
 Patch0:  lxqt-policykit-0.8.0-cmake-libexec.patch
-Requires: lxqt-common >= 0.8.0
+Patch1:  lxqt-policykit-0.8.0-unify.patch
 
 BuildRequires: %{cmake_pkg} >= 2.8.9
 BuildRequires: pkgconfig(polkit-qt5-1)
 BuildRequires: pkgconfig(polkit-agent-1)
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
-BuildRequires: pkgconfig(lxqt-qt5)
+BuildRequires: pkgconfig(lxqt)
 BuildRequires: desktop-file-utils
 
 Provides: PolicyKit-authentication-agent
+
+Requires: lxqt-common >= 0.8.0
 
 %description
 %{summary}.
@@ -31,7 +33,8 @@ Provides: PolicyKit-authentication-agent
 %prep
 %setup -q
 
-%patch0 -p1
+%patch0 -p1 -b .libexec
+%patch1 -p1 -b .unify
 
 %build
 mkdir -p %{_target_platform}
@@ -51,6 +54,9 @@ install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 %{_libexecdir}/lxqt-policykit-agent
 
 %changelog
+* Sat Dec 20 2014 Helio Chissini de Castro <hcastro@redhat.com> - 0.8.0-6
+- Unify naming as discussed on Fedora IRC
+
 * Fri Dec 19 2014 Rex Dieter <rdieter@fedoraproject.org> 0.8.0-5
 - Provides: PolicyKit-authentication-agent
 
