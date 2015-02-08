@@ -1,31 +1,25 @@
-%if 0%{?rhel} == 6
-%define cmake_pkg cmake28
-%else
-%define cmake_pkg cmake
-%endif
-
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
-Version: 0.8.0
-Release: 7%{?dist}
+Version: 0.9.0
+Release: 1%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
-Source0: http://lxqt.org/downloads/lxqt/0.8.0/%{name}-%{version}.tar.xz
+Source0: http://downloads.lxqt.org/lxqt/0.9.0/lxqt-policykit-0.9.0.tar.xz
 # ( Upstream ? )
-Patch0:  lxqt-policykit-0.8.0-cmake-libexec.patch
-Patch1:  lxqt-policykit-0.8.0-unify.patch
+Patch0:  lxqt-policykit-0.9.0-cmake-libexec.patch
 
-BuildRequires: %{cmake_pkg} >= 2.8.9
+BuildRequires: cmake >= 2.8.9
 BuildRequires: pkgconfig(polkit-qt5-1)
 BuildRequires: pkgconfig(polkit-agent-1)
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
 BuildRequires: pkgconfig(lxqt)
+BuildRequires: kf5-kwindowsystem-devel >= 5.5
 BuildRequires: desktop-file-utils
 
 Provides: PolicyKit-authentication-agent
 
-Requires: lxqt-common >= 0.8.0
+Requires: lxqt-common >= 0.9.0
 
 %description
 %{summary}.
@@ -34,12 +28,11 @@ Requires: lxqt-common >= 0.8.0
 %setup -q
 
 %patch0 -p1 -b .libexec
-%patch1 -p1 -b .unify
 
 %build
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
-%{?cmake28}%{!?cmake28:%{?cmake}} -DUSE_QT5=TRUE ..
+	%{cmake} -DPOLKIT_AGENT_BINARY_DIR=%{_libexecdir} ..
 popd
 
 make %{?_smp_mflags} -C %{_target_platform}
@@ -52,8 +45,17 @@ install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 %files
 %doc COPYING
 %{_libexecdir}/lxqt-policykit-agent
+%dir %{_datadir}/lxqt
+%dir %{_datadir}/lxqt/translations
+%{_datadir}/lxqt/translations/*
 
 %changelog
+* Sun Feb 08 2015 Helio Chissini de Castro <helio@kde.org> - 0.9.0-1
+- New upstream release 0.9.0
+
+* Tue Feb 03 2015 Helio Chissini de Castro <hcastro@redhat.com> - 0.9.0-0.1
+- Preparing 0.9.0 release
+
 * Mon Dec 29 2014 Helio Chissini de Castro <hcastro@redhat.com> - 0.8.0-7
 - Rebuild against new Qt 5.4.0
 
