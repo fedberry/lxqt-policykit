@@ -1,7 +1,7 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
 Version: 0.9.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/0.9.0/lxqt-policykit-0.9.0.tar.xz
@@ -42,14 +42,16 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 
-%files
+%find_lang %{name}-agent --with-qt
+
+%files -f %{name}-agent.lang
 %doc COPYING
 %{_libexecdir}/lxqt-policykit-agent
-%dir %{_datadir}/lxqt
-%dir %{_datadir}/lxqt/translations
-%{_datadir}/lxqt/translations/*
 
 %changelog
+* Mon Feb 09 2015 Helio Chissini de Castro <helio@kde.org> - 0.9.0-2
+- Proper add locale for Qt tm files
+
 * Sun Feb 08 2015 Helio Chissini de Castro <helio@kde.org> - 0.9.0-1
 - New upstream release 0.9.0
 
