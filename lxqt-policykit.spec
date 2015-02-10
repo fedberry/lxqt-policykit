@@ -1,7 +1,7 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
 Version: 0.9.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/0.9.0/lxqt-policykit-0.9.0.tar.xz
@@ -20,6 +20,10 @@ BuildRequires: desktop-file-utils
 Provides: PolicyKit-authentication-agent
 
 Requires: lxqt-common >= 0.9.0
+
+%if 0%{?fedora} >= 22
+Obsoletes: razorqt-policykit-agent <= 0.5.2
+%endif
 
 %description
 %{summary}.
@@ -49,6 +53,9 @@ install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 %{_libexecdir}/lxqt-policykit-agent
 
 %changelog
+* Tue Feb 10 2015 Helio Chissini de Castro <helio@kde.org> - 0.9.0-3
+- Obsoletes razorqt-policykit-agent
+
 * Mon Feb 09 2015 Helio Chissini de Castro <helio@kde.org> - 0.9.0-2
 - Proper add locale for Qt tm files
 
