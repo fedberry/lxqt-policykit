@@ -1,7 +1,7 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
 Version: 0.9.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/0.9.0/lxqt-policykit-0.9.0.tar.xz
@@ -53,6 +53,9 @@ install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 %{_libexecdir}/lxqt-policykit-agent
 
 %changelog
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.0-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Wed Feb 18 2015 Helio Chissini de Castro <helio@kde.org> - 0.9.0-4
 - Rebuild (gcc5)
 
