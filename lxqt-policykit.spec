@@ -1,12 +1,10 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
-Version: 0.9.0
-Release: 5%{?dist}
+Version: 0.10.0
+Release: 1%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
-Source0: http://downloads.lxqt.org/lxqt/0.9.0/lxqt-policykit-0.9.0.tar.xz
-# ( Upstream ? )
-Patch0:  lxqt-policykit-0.9.0-cmake-libexec.patch
+Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-policykit-%{version}.tar.xz
 
 BuildRequires: cmake >= 2.8.9
 BuildRequires: pkgconfig(polkit-qt5-1)
@@ -31,8 +29,6 @@ Obsoletes: razorqt-policykit-agent <= 0.5.2
 %prep
 %setup -q
 
-%patch0 -p1 -b .libexec
-
 %build
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
@@ -49,10 +45,12 @@ install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 %find_lang %{name}-agent --with-qt
 
 %files -f %{name}-agent.lang
-%doc COPYING
 %{_libexecdir}/lxqt-policykit-agent
 
 %changelog
+* Mon Nov 02 2015 Helio Chissini de Castro <helio@kde.org> - 0.10.0-1
+- New upstream version
+
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.0-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
