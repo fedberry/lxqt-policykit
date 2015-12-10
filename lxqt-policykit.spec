@@ -1,27 +1,20 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
 Version: 0.10.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-policykit-%{version}.tar.xz
-
-BuildRequires: cmake >= 2.8.9
 BuildRequires: pkgconfig(polkit-qt5-1)
 BuildRequires: pkgconfig(polkit-agent-1)
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
-BuildRequires: pkgconfig(lxqt)
+BuildRequires: pkgconfig(lxqt) >= 0.10.0-4
 BuildRequires: kf5-kwindowsystem-devel >= 5.5
 BuildRequires: desktop-file-utils
-
 Provides: PolicyKit-authentication-agent
-
-Requires: lxqt-common >= 0.9.0
-
-%if 0%{?fedora} >= 22
+Requires: lxqt-common >= 0.10.0
 Obsoletes: razorqt-policykit-agent <= 0.5.2
-%endif
 
 %description
 %{summary}.
@@ -32,7 +25,7 @@ Obsoletes: razorqt-policykit-agent <= 0.5.2
 %build
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
-	%{cmake} -DPOLKIT_AGENT_BINARY_DIR=%{_libexecdir} ..
+	%{cmake_lxqt} -DPOLKIT_AGENT_BINARY_DIR=%{_libexecdir} ..
 popd
 
 make %{?_smp_mflags} -C %{_target_platform}
@@ -48,6 +41,9 @@ install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 %{_libexecdir}/lxqt-policykit-agent
 
 %changelog
+* Thu Dec 10 2015 Helio Chissini de Castro <helio@kde.org> - 0.10.0-2
+- Use new cmake_lxqt infra
+
 * Mon Nov 02 2015 Helio Chissini de Castro <helio@kde.org> - 0.10.0-1
 - New upstream version
 
