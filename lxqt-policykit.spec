@@ -1,7 +1,7 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
 Version: 0.10.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-policykit-%{version}.tar.xz
@@ -14,7 +14,6 @@ BuildRequires: kf5-kwindowsystem-devel >= 5.5
 BuildRequires: desktop-file-utils
 Provides: PolicyKit-authentication-agent
 Requires: lxqt-common >= 0.10.0
-Obsoletes: razorqt-policykit-agent <= 0.5.2
 
 %description
 %{summary}.
@@ -41,6 +40,9 @@ install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 %{_libexecdir}/lxqt-policykit-agent
 
 %changelog
+* Wed Jan 20 2016 Helio Chissini de Castro <helio@kde.org> - 0.10.0-3
+- Another razorqt obsoletes
+
 * Thu Dec 10 2015 Helio Chissini de Castro <helio@kde.org> - 0.10.0-2
 - Use new cmake_lxqt infra
 
