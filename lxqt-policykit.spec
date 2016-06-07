@@ -1,10 +1,11 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
 Version: 0.10.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-policykit-%{version}.tar.xz
+Patch0: lxqt-policykit-authdialog.patch
 BuildRequires: pkgconfig(polkit-qt5-1)
 BuildRequires: pkgconfig(polkit-agent-1)
 BuildRequires: pkgconfig(Qt5Help)
@@ -20,6 +21,7 @@ Requires: lxqt-common >= 0.10.0
 
 %prep
 %setup -q
+%patch0 -p1 -b .hide
 
 %build
 mkdir -p %{_target_platform}
@@ -40,6 +42,9 @@ install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 %{_libexecdir}/lxqt-policykit-agent
 
 %changelog
+* Tue Jun 07 2016 Than Ngo <than@redhat.com> - 0.10.0-5
+- hide the identity because it's alway root
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.10.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 

@@ -1,0 +1,13 @@
+diff -up lxqt-policykit-0.10.0/src/policykitagentgui.cpp.than lxqt-policykit-0.10.0/src/policykitagentgui.cpp
+--- lxqt-policykit-0.10.0/src/policykitagentgui.cpp.than	2016-06-06 13:01:02.977733898 +0200
++++ lxqt-policykit-0.10.0/src/policykitagentgui.cpp	2016-06-07 17:09:44.175598686 +0200
+@@ -45,6 +45,8 @@ PolicykitAgentGUI::PolicykitAgentGUI(con
+ 
+     messageLabel->setText(message);
+     iconLabel->setPixmap(XdgIcon::fromTheme(iconName).pixmap(64, 64));
++    identityComboBox->hide();
++    label->hide();
+ 
+     foreach (PolkitQt1::Identity identity, identities)
+     {
+diff -up lxqt-policykit-0.10.0/src/policykitagentgui.ui.than lxqt-policykit-0.10.0/src/policykitagentgui.ui
