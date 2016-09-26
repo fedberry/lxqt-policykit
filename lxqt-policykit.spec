@@ -1,20 +1,20 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
-Version: 0.10.0
-Release: 5%{?dist}
+Version: 0.11.0
+Release: 1%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
-Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-policykit-%{version}.tar.xz
-Patch0: lxqt-policykit-authdialog.patch
+Source0: http://downloads.lxqt.org/lxqt/%{version}/%{name}-%{version}.tar.xz
+Patch0: lxqt-policykit-0.11.0-authdialog.patch
 BuildRequires: pkgconfig(polkit-qt5-1)
 BuildRequires: pkgconfig(polkit-agent-1)
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
-BuildRequires: pkgconfig(lxqt) >= 0.10.0-4
+BuildRequires: pkgconfig(lxqt) >= 0.11.0
 BuildRequires: kf5-kwindowsystem-devel >= 5.5
 BuildRequires: desktop-file-utils
 Provides: PolicyKit-authentication-agent
-Requires: lxqt-common >= 0.10.0
+Requires: lxqt-common >= 0.11.0
 
 %description
 %{summary}.
@@ -26,7 +26,10 @@ Requires: lxqt-common >= 0.10.0
 %build
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
-	%{cmake_lxqt} -DPOLKIT_AGENT_BINARY_DIR=%{_libexecdir} ..
+	%{cmake_lxqt} \
+        -DPOLKIT_AGENT_BINARY_DIR=%{_libexecdir} \
+        -DPULL_TRANSLATIONS=NO \
+        ..
 popd
 
 make %{?_smp_mflags} -C %{_target_platform}
@@ -36,12 +39,13 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 
-%find_lang %{name}-agent --with-qt
-
-%files -f %{name}-agent.lang
+%files
 %{_libexecdir}/lxqt-policykit-agent
 
 %changelog
+* Mon Sep 26 2016 Helio Chissini de Castro <helio@kde.org> - 0.11.0-1
+- New upstream release 0.11.0
+
 * Tue Jun 07 2016 Than Ngo <than@redhat.com> - 0.10.0-5
 - hide the identity because it's alway root
 
