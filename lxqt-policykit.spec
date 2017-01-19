@@ -1,7 +1,7 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
 Version: 0.11.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/%{name}-%{version}.tar.xz
@@ -43,6 +43,9 @@ install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 %{_libexecdir}/lxqt-policykit-agent
 
 %changelog
+* Thu Jan 19 2017 Christian Dersch <lupinix@mailbox.org> - 0.11.1-3
+- rebuilt
+
 * Wed Jan 18 2017 Christian Dersch <lupinix@mailbox.org> - 0.11.1-2
 - moved translations to lxqt-l10n
 
