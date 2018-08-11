@@ -1,27 +1,25 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
-Version: 0.11.1
-Release: 8%{?dist}
+Version: 0.13.0
+Release: 1%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
-Source0: http://downloads.lxqt.org/lxqt/%{version}/%{name}-%{version}.tar.xz
-Patch0: lxqt-policykit-0.11.0-authdialog.patch
+Source0: https://github.com/lxqt/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+
 BuildRequires: pkgconfig(polkit-qt5-1)
 BuildRequires: pkgconfig(polkit-agent-1)
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
-BuildRequires: pkgconfig(lxqt) >= 0.11.0
+BuildRequires: pkgconfig(lxqt) >= 0.13.0
 BuildRequires: kf5-kwindowsystem-devel >= 5.5
 BuildRequires: desktop-file-utils
 Provides: PolicyKit-authentication-agent = %{version}
-Requires: lxqt-common >= 0.11.0
 
 %description
 %{summary}.
 
 %prep
 %setup -q
-%patch0 -p1 -b .hide
 
 %build
 mkdir -p %{_target_platform}
@@ -41,8 +39,12 @@ install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 
 %files
 %{_libexecdir}/lxqt-policykit-agent
+%{_sysconfdir}/xdg/autostart/lxqt-policykit-agent.desktop
 
 %changelog
+* Fri Aug 03 2018 Zamir SUN <zsun@fedoraproject.org> - 0.13.0-1
+- Update to version 0.13.0
+
 * Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.11.1-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
