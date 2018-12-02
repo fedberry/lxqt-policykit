@@ -1,10 +1,11 @@
 Name:    lxqt-policykit
 Summary: PolicyKit agent for LXQt desktop suite
 Version: 0.13.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: https://github.com/lxqt/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Patch0:  lxqt-policykit-libexec.patch
 
 BuildRequires: pkgconfig(polkit-qt5-1)
 BuildRequires: pkgconfig(polkit-agent-1)
@@ -15,11 +16,14 @@ BuildRequires: kf5-kwindowsystem-devel >= 5.5
 BuildRequires: desktop-file-utils
 Provides: PolicyKit-authentication-agent = %{version}
 
+
 %description
 %{summary}.
 
+
 %prep
-%setup -q
+%autosetup -p1
+
 
 %build
 mkdir -p %{_target_platform}
@@ -31,6 +35,7 @@ popd
 
 make %{?_smp_mflags} -C %{_target_platform}
 
+
 %install
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
@@ -41,7 +46,11 @@ install -d %{buildroot}/%{_sysconfdir}/xdg/autostart
 %{_libexecdir}/lxqt-policykit-agent
 %{_sysconfdir}/xdg/autostart/lxqt-policykit-agent.desktop
 
+
 %changelog
+* Fri Nov 30 2018 Vaughan Agrez <devel at agrez dot net> - 0.13.0-2
+- Fix policykit autostart path (Patch0)
+
 * Fri Aug 03 2018 Zamir SUN <zsun@fedoraproject.org> - 0.13.0-1
 - Update to version 0.13.0
 

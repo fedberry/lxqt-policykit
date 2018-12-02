@@ -1,0 +1,14 @@
+--- lxqt-common-0.13.0/autostart/lxqt-policykit-agent.desktop.in.orig
++++ lxqt-common-0.13.0/autostart/lxqt-policykit-agent.desktop.in
+@@ -1,8 +1,9 @@
+ [Desktop Entry]
+ Type=Application
+ Name=PolicyKit Handler
+-TryExec=lxqt-policykit-agent
+-Exec=lxqt-policykit-agent
++Comment=PolicyKit Handler
++TryExec=/usr/libexec/lxqt-policykit-agent
++Exec=/usr/libexec/lxqt-policykit-agent
+ OnlyShowIn=LXQt;
+ X-LXQt-Module=true
+ 
